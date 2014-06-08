@@ -14,10 +14,32 @@ def url_c():
     c = docker.Client(base_url='http://dh1.ucount.com:2375', version='1.10', timeout=10)    
     return c
 
+def stop(request):
+    c = url_c()
+
+    instance_id = request.POST.get('instance_id', False)
+    c.stop(instance_id)
+
+    return render(request, 'data.html')
+
+def remove(request):
+    c = url_c()
+
+    instance_id = request.POST.get('instance_id', False)
+    c.remove_container(instance_id)
+
+    return redirect('/track/')    
+
 def get_json_data(request):
     q = requests.get('http://dh1.ucount.com:2375/containers/json?all=1')
     containers = q.json()
-    data = {'containers': containers}
+    raw_json = json.dumps(containers)
+    get_id = json.loads(raw_json)  
+    for each in get_id: 
+        main_id = each['Id']
+        logging.info(main_id)
+
+    data = {'containers': containers, 'main_id': main_id, 'get_id': get_id}
     return render(request, 'data.html', data)
 
 
@@ -38,8 +60,7 @@ def prep_docker(request):
 def start_docker(request):
     # Get the user inputed container name
     my_con = request.POST.get('instance_id', False)
-    logging.info('Check it out:')
-    logging.info(my_con)
+
     # my_con = '88c116c7358afb217bf691ab60d846e491fdb5c1e2f5c6c2fee5ef1d5da31a56'
     rad= randint(100, 999)
 
@@ -54,9 +75,7 @@ def start_docker(request):
     #stuff = {'parts': parts}    
     
     #data = {'my_con': my_con}
-    return redirect('/data/')
-    #return render(request, 'data.html', data)
- 
+    return redirect('/track/') 
 
 def test_containers(name):
     c = url_c()
@@ -105,9 +124,4 @@ def pack_to_ship(request):
     #instance_name = n.__getitem__('instance_name')
 
     return render(request, 'pack.html', returned_data)
-
-#def stop(request):
-#    c.stop(id)
-#    return render(request, 'pack.html')
-
 

@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     url(r'^ship/$', 'theharbor.views.start_docker', name='ship'),
     url(r'^pack/$', 'theharbor.views.pack_to_ship', name='pack'),
 
+    url(r'^stop/$', 'theharbor.views.stop', name='stop'),
+    url(r'^remove/$', 'theharbor.views.remove', name='remove'),
+
     # url(r'^tryz/$', 'theharbor.views.instance_name', name='tryz'),
 
 )

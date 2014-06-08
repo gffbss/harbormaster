@@ -1,28 +1,27 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
-    <h2>Ship off from Port</h2>
+    <h2>Looks Like Everything Is Good</h2>
 <div class="container">    
    <div class="row">
         <div class="col-sm-12">
             <form action="" method="get">
-              <h3>What would you like to do with your container</h3>
+              <h3>Are you ready to launch?</h3>
+              <img id="shipping-ship" src="{% static 'img/cargo-color-launch.png' %}" class="img-responsive">              
             </form>
         </div>
     </div>
 
     <div id="control-container" class="row">
-        <div class="col-sm-6 btn-center">
+        <div class="col-sm-12 btn-center">
           <form action="{% url 'ship' %}" method="post">
             {% csrf_token %}            
                 <input id="instance-name" type="hidden" name="instance_id" value="{{ container_id }}">
                 <button id="btn-start" class="btn btn-primary" type="submit"><i class="ss-play"></i></button>
           </form> 
 
-        </div>
-        <div class="col-sm-6 btn-center">
-          <button id="btn-stop" class="btn btn-primary" type="submit"><i class="ss-stop"></i></button>
         </div>
     </div>
 </div>

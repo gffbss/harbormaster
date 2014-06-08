@@ -3,10 +3,35 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-    	<h1>Ships Out To Sea</h1>
+
+    	<h1>Ships Out At Sea</h1>
     	<div class="col-sm-12">
     		{% for info in containers %}
-        		<p>This is a Container: {{ info }}</p>
+        	<div id="btn-left">
+        		<h4>Container Id:</h4> {{ info.Id }}, <h4>Status:</h4> {{ info.Status }}</p>
+        		<form action="{% url 'stop' %}" method="post">
+            	{% csrf_token %}            
+            		<input id="instance-id" type="hidden" name="instance_id" value="{{ info.Id }}">
+        		{% if 'Exit' in info.Status %}	            		
+        			<button id="stop-instance" class="btn btn-warning" disabled>Stop</button>
+        		{% else %}
+        			<button id="stop-instance" class="btn btn-warning">Stop</button>
+				{% endif %}
+				</form>  
+			</div>
+
+			<div id="btn-right">
+				<form action="{% url 'remove' %}" method="post">
+            	{% csrf_token %}            					
+					<input id="instance-id" type="hidden" name="instance_id" value="{{ info.Id }}">
+        		{% if 'Exit' in info.Status %}	
+        			<button id="kill-instance" class="btn btn-danger">Kill</button>
+        		{% else %}
+        			<button id="kill-instance" class="btn btn-danger" disable>Kill</button>
+				{% endif %}
+				</form>    
+			</div>	     		
+        		<hr>
     		{% endfor %}   
     	</div>
     </div>	

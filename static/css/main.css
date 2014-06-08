@@ -129,6 +129,10 @@ a:hover{
     padding-top: 25px;
 }
 
+#btn-right{
+    padding-top: 10px;
+}
+
 #instance-name{
     margin-left: auto;
     margin-right: auto;
