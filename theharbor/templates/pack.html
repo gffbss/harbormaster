@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
     <div class="row">
-        <h2>Get in the que</h2>
-        <form action="" method="get">
-            <label for="name">What would you like to call your instance</label>
-            <input type="text" name="instance_name">
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+        <h2>Set up the queue for departure</h2>
+        <form action="{% url 'ship' %}" method="post">
+        	{% csrf_token %}
+            <label for="name">What would you like to call your instance?</label>
+            <input id="instance_name" type="text" name="instance_name">
+			
+        	<button id="setup-instance" class="btn btn-primary">Setup A Container</button>
+    		 
+    	</form> 
+     </div>
 </div>
 {% endblock %}

@@ -8,6 +8,8 @@
 
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
 </head>
 
 <body>
@@ -21,14 +23,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'index' %}"><img id="main-nav-img" alt="HarborMaster" src="/static/img/harbormaster.png"></a>
+      <a class="navbar-brand" href="{% url 'index' %}"><img id="main-nav-img" alt="HarborMaster" src="/static/img/harbormaster-main.png"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div id="mobile-navbar" class="collapse navbar-collapse" >
       <ul id="nav-links" class="nav navbar-nav">
         <li><a href="{% url 'pack' %}">Pack</a></li>
-        <li><a href="{% url 'start' %}">Ship</a></li>
+        <li><a href="{% url 'ship' %}">Ship</a></li>
         <li><a href="{% url 'json' %}">Track</a></li>
         <li><a href="http://www.github.com/gffbss/harbormaster" target="blank">Github</a></li>
 

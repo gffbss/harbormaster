@@ -1,0 +1,56 @@
+{"hosts": [
+    {
+        "name": "host1",
+        "url": "dh1.ucount.com:2375"
+    },
+    {
+        "name": "host2",
+        "url": "dh2.ucount.com:2375"
+    }
+],
+"environments":[{"name":"dev","repo":"dh1.ucount.com","url":"dh1.ucount.com","port":"9000"  },
+            {"name":"prod","repo":"dh2.ucount.com","url":"dh1.ucount.com","port":"9001" }],
+
+"projects":[{"name":"testme",
+            "repo":"dh1.ucount.com/testme2",
+            "url":"dh1.ucount.com",
+            "port":"9000",
+            "containers":[
+                        {"name":"'hello1'",
+                            "image":"'ubuntu:latest'",
+                            "command":"'/bin/bash'",
+                            "hostname":"None",
+                            "user":"None",
+                            "detach":"False",
+                            "stdin_open":"False",
+                            "tty":"False",
+                            "mem_limit":"0",
+                            "ports":"None",
+                            "environment":"None",
+                            "dns":"None",
+                            "volumes":"None",
+                            "volumes_from":"None",
+                            "network_disabled":"False",
+                            "entrypoint":"None",
+                            "cpu_shares":"None",
+                            "working_dir":"None"},
+                       {"name":"'hello2'",
+                           "image":"'ubuntu:latest'",
+                           "command":"'/bin/bash'",
+                           "hostname":"None",
+                           "user":"None",
+                           "detach":"False",
+                           "stdin_open":"False",
+                           "tty":"False",
+                           "mem_limit":"0",
+                           "ports":"None",
+                           "environment":"None",
+                           "dns":"None",
+                           "volumes":"None",
+                           "volumes_from":"None",
+                           "network_disabled":"False",
+                           "entrypoint":"None",
+                           "cpu_shares":"None",
+                           "working_dir":"None"}]
+            }]
+}

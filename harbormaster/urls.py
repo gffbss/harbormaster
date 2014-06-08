@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'theharbor.views.index', name='index'),
     url(r'^data/$', 'theharbor.views.get_json_data', name='json'),
-    url(r'^start/$', 'theharbor.views.start_docker', name='start'),
-    url(r'^prep/$', 'theharbor.views.pack_to_ship', name='pack'),
+    url(r'^ship/$', 'theharbor.views.start_docker', name='ship'),
+    url(r'^pack/$', 'theharbor.views.pack_to_ship', name='pack'),
+
+
 )

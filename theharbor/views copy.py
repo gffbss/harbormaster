@@ -4,10 +4,6 @@ import requests
 import logging
 import json
 
-def url_c():
-    c = docker.Client(base_url='http://dh1.ucount.com:2375', version='1.10', timeout=10)    
-    return c
-
 def index(request):
     return render(request, 'index.html')
 
@@ -21,11 +17,15 @@ def get_json_data(request):
 #    return render(request, 'pack.html')
 
 def start_docker(request):
-    # Get the user inputed container name
-    name = request.POST['instance_name']
+#    i_name = 'maxwell-10x'
+    i_name = 'maxwell-11x'
+#    params = requests.get
+#    check = 'instance_name'
+#    if check in params:
+#        instance = params.__getitem__('instance_name')
 
-    c = url_c()
-    test = c.create_container('ubuntu:13.10', command='/bin/bash', hostname='dh1-x.ucount.com', detach=True, stdin_open=True, tty=True, mem_limit=0, ports=8001, environment=None, dns=None, volumes=None, volumes_from=None, network_disabled=False, name='{}'.format(name), entrypoint=None, cpu_shares=None, working_dir=None)    
+    c = docker.Client(base_url='http://dh1.ucount.com:2375', version='1.10', timeout=10)
+    test = c.create_container('ubuntu:13.10', command='/bin/bash', hostname='dh1-x.ucount.com', detach=True, stdin_open=True, tty=True, mem_limit=0, ports=8001, environment=None, dns=None, volumes=None, volumes_from=None, network_disabled=False, name='{}'.format(i_name), entrypoint=None, cpu_shares=None, working_dir=None)    
     
     parts = json.dumps(test)    
     stuff = {'parts': parts}    
@@ -36,7 +36,6 @@ def start_docker(request):
 
 
 def test_containers(name):
-    c = url_c()
     name=name.replace("'","")
     cons = c.containers(all=1)
     for each in cons:
@@ -45,9 +44,8 @@ def test_containers(name):
            return False
     return True
 
-def build_new_containers(new_containers):
-    c = url_c()
-    arg = []
+def build_new_containers(new_containers, arg):
+    arg = ()
     for each in new_containers:
         test="c.create_container("+each["image"]+","
 
@@ -67,21 +65,19 @@ def pack_to_ship(request):
     data = json.load(json_data)
     json_data.close()
 
-    host1 = data["hosts"][0]["url"]
+    # pprint(data)
 
-    c = url_c()
+    host1 = data["hosts"][0]["url"]
+    # print host1
+
+    c = docker.Client(base_url='http://'+host1,version='1.10',timeout=10)
 
     new_containers = data["projects"][0]["containers"]
     output = build_new_containers(new_containers)
 
     returned_data = {'host1':host1, 'new_containers': new_containers, 'output':output}
-    
-
-    # get url params
-    #n = request.GET
-    #instance_name = n.__getitem__('instance_name')
-
     return render(request, 'pack.html', returned_data)
+
 
 
 

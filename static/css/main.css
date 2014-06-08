@@ -6,6 +6,15 @@ h1, h2{
     text-align: center;
 }
 
+a{
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #25B3E4;
+}
+
 .jumbotron{
     background-image: url('/static/img/shipping.jpg');
     height: 300px;
@@ -41,7 +50,7 @@ h1, h2{
 #nav-links{
     padding-top: 40px;
     font-size: 24px;
-    margin-left: 75px;
+    margin-left: 55px;
 }
 
 .center-align{

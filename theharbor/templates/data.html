@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Hey there</h1>
-    {{ stuff }}
-    {{ stuff.Image }}
+    <h1>Hey There Containers</h1>
+    {% for thing in stuff %}
+        <p>This is a Container: {{ thing }}</p>
+    {% endfor %}    
 {% endblock %}
