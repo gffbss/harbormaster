@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import docker
 import requests
 import logging
 import json
 from random import randint
 
+logging.basicConfig(filename='testing_logs.log', level=logging.INFO)
 
 def index(request):
     return render(request, 'index.html')
@@ -15,8 +16,8 @@ def url_c():
 
 def get_json_data(request):
     q = requests.get('http://dh1.ucount.com:2375/containers/json?all=1')
-    stuff = q.json()
-    data = {'stuff': stuff}
+    containers = q.json()
+    data = {'containers': containers}
     return render(request, 'data.html', data)
 
 
@@ -31,13 +32,15 @@ def prep_docker(request):
     get_id = json.loads(parts)   
     container_id = get_id['Id']
     data = {'container_id': container_id}  
-
     return render(request, 'start.html', data)
 
 # Start up the docker instance
 def start_docker(request):
     # Get the user inputed container name
-    my_con = '99fe13bb1cd6fbfd653a5f42f507990fa968abb0caea2aea84833ecdc45ad9df'
+    my_con = request.POST.get('instance_id', False)
+    logging.info('Check it out:')
+    logging.info(my_con)
+    # my_con = '88c116c7358afb217bf691ab60d846e491fdb5c1e2f5c6c2fee5ef1d5da31a56'
     rad= randint(100, 999)
 
     ssh=46000+rad
@@ -50,7 +53,9 @@ def start_docker(request):
     #parts = json.dumps(test)    
     #stuff = {'parts': parts}    
     
-    return render(request, 'data.html')
+    #data = {'my_con': my_con}
+    return redirect('/data/')
+    #return render(request, 'data.html', data)
  
 
 def test_containers(name):
@@ -76,7 +81,6 @@ def build_new_containers(new_containers):
                     test+=" %s=%s," % ( k, v)
 
             test=test[:-1]+")"
-            #print test
             arg.append(eval(test))
     return arg
 
@@ -102,7 +106,8 @@ def pack_to_ship(request):
 
     return render(request, 'pack.html', returned_data)
 
-#def pack_to_ship(request):
+#def stop(request):
+#    c.stop(id)
 #    return render(request, 'pack.html')
 
 

@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
 <div class="container">
     <div class="row">
         <h2>Prep your ship for launch.</h2>
+        <img id="shipping-ship" src="{% static 'img/Cargo-color.png' %}" class="img-responsive">
         <div id="prep-info">
        		<form action="{% url 'prep' %}" method="post">
         		{% csrf_token %}

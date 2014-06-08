@@ -57,6 +57,11 @@ a:hover{
     text-align: center;
 }
 
+#shipping-ship{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .center-align{
     padding-top: 30px;
     text-align: center;
@@ -98,8 +103,7 @@ a:hover{
 }
 
 #btn-start{
-    color: black;
-    border-color: black;
+    width: 175px;
 }
 
 #btn-start:hover{
@@ -112,8 +116,13 @@ a:hover{
     color: #25B3E4;
 }
 #btn-stop{
-    color: black;
-    border-color: black;
+    width: 175px;
+}
+
+#control-container{
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 #btn-space{

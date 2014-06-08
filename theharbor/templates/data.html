@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Hey There Containers</h1>
-    {% for thing in stuff %}
-        <p>This is a Container: {{ thing }}</p>
-    {% endfor %}    
+<div class="container">
+	<div class="row">
+    	<h1>Ships Out To Sea</h1>
+    	<div class="col-sm-12">
+    		{% for info in containers %}
+        		<p>This is a Container: {{ info }}</p>
+    		{% endfor %}   
+    	</div>
+    </div>	
+</div>     
 {% endblock %}
