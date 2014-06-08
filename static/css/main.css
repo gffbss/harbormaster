@@ -2,7 +2,7 @@ body{
     font-family:'PT Sans', sans-serif;
 }
 
-h1, h2{
+h1, h2, h3{
     text-align: center;
 }
 
@@ -53,6 +53,10 @@ a:hover{
     margin-left: 55px;
 }
 
+#prep-info{
+    text-align: center;
+}
+
 .center-align{
     padding-top: 30px;
     text-align: center;
@@ -68,6 +72,58 @@ a:hover{
 
 .ss-connection{
     font-size: 800%;
+}
+
+.ss-play{
+    font-size: 200%;
+}
+
+.start{
+    width: 200px;
+    padding: 18px;
+
+}
+
+.ss-stop{
+    font-size: 200%;
+}
+
+.stop{
+    width: 200px;
+    padding: 18px;
+}
+
+.btn-center{
+    text-align: center;
+}
+
+#btn-start{
+    color: black;
+    border-color: black;
+}
+
+#btn-start:hover{
+    text-decoration: none;
+    color: #25B3E4;
+}
+
+#btn-stop:hover{
+    text-decoration: none;
+    color: #25B3E4;
+}
+#btn-stop{
+    color: black;
+    border-color: black;
+}
+
+#btn-space{
+    padding-top: 25px;
+}
+
+#instance-name{
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
 }
 
 @media screen and (max-width: 910px){

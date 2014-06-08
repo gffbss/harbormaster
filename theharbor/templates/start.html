@@ -3,10 +3,27 @@
 {% block content %}
 
     <h2>Ship off from Port</h2>
-    <form action="" method="get">
-        <label for="name">What would you like to do with your instance</label>
-        <input type="text" name="instance_name"> 
-        <input type="submit" value="Submit">
-    </form>
-    {{ parts }}
+<div class="container">    
+   <div class="row">
+        <div class="col-sm-12">
+            <form action="" method="get">
+              <h3>What would you like to do with your container</h3>
+              <!-- <input type="text" name="instance_name" class="form-control">  -->
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 btn-center">
+          <a href="{% url 'ship' %}">  
+            <h1 id="btn-start" class="start"><i class="ss-play"></i></h1>
+          </a>
+        </div>
+        <div class="col-sm-6 btn-center">
+
+          <h1 id="btn-stop" class="stop"><i class="ss-stop"></i></h1>
+        </div>
+    </div>
+</div>
+ {{ container_id }}   
 {% endblock %}

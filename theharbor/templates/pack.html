@@ -4,15 +4,17 @@
 
 <div class="container">
     <div class="row">
-        <h2>Set up the queue for departure</h2>
-        <form action="{% url 'ship' %}" method="post">
-        	{% csrf_token %}
-            <label for="name">What would you like to call your instance?</label>
-            <input id="instance_name" type="text" name="instance_name">
-			
-        	<button id="setup-instance" class="btn btn-primary">Setup A Container</button>
-    		 
-    	</form> 
+        <h2>Prep your ship for launch.</h2>
+        <div id="prep-info">
+       		<form action="{% url 'prep' %}" method="post">
+        		{% csrf_token %}
+            	<h3>Please Name Your Instance</h3>
+            	<input id="instance-name" type="text" class="form-control" name="instance_name" placeholder="Any Name Will Do">
+				<p id="btn-space">
+        		<button id="setup-instance" class="btn btn-primary">Setup A Container</button>
+    			</p> 
+    		</form> 
+    	</div>
      </div>
 </div>
 {% endblock %}

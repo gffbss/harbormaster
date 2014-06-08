@@ -3,13 +3,15 @@ import docker
 import requests
 import logging
 import json
+from random import randint
+
+
+def index(request):
+    return render(request, 'index.html')
 
 def url_c():
     c = docker.Client(base_url='http://dh1.ucount.com:2375', version='1.10', timeout=10)    
     return c
-
-def index(request):
-    return render(request, 'index.html')
 
 def get_json_data(request):
     q = requests.get('http://dh1.ucount.com:2375/containers/json?all=1')
@@ -17,23 +19,39 @@ def get_json_data(request):
     data = {'stuff': stuff}
     return render(request, 'data.html', data)
 
-#def pack_to_ship(request):
-#    return render(request, 'pack.html')
 
-def start_docker(request):
+def prep_docker(request):
     # Get the user inputed container name
     name = request.POST['instance_name']
 
     c = url_c()
-    test = c.create_container('ubuntu:13.10', command='/bin/bash', hostname='dh1-x.ucount.com', detach=True, stdin_open=True, tty=True, mem_limit=0, ports=8001, environment=None, dns=None, volumes=None, volumes_from=None, network_disabled=False, name='{}'.format(name), entrypoint=None, cpu_shares=None, working_dir=None)    
+    create = c.create_container('gmaxwell94/ssh_etcd', command='/usr/bin/supervisord', hostname='{}.prod'.format(name), detach=True, stdin_open=True, tty=True, mem_limit=0, ports="[22,8098,8087]", environment=None, dns=None, volumes=None, volumes_from=None, network_disabled=False, name='{}'.format(name), entrypoint=None, cpu_shares=None, working_dir=None)    
     
-    parts = json.dumps(test)    
-    stuff = {'parts': parts}    
-    
-    return render(request, 'start.html', stuff)
- 
-# Logic Below
+    parts = json.dumps(create) 
+    get_id = json.loads(parts)   
+    container_id = get_id['Id']
+    data = {'container_id': container_id}  
 
+    return render(request, 'start.html', data)
+
+# Start up the docker instance
+def start_docker(request):
+    # Get the user inputed container name
+    my_con = '99fe13bb1cd6fbfd653a5f42f507990fa968abb0caea2aea84833ecdc45ad9df'
+    rad= randint(100, 999)
+
+    ssh=46000+rad
+    http1=46001+rad
+    http2=46002+rad
+
+    c = url_c()
+    test = c.start(my_con, binds=None, port_bindings={22:ssh,8098:http1,8087:http2}, lxc_conf='docker', publish_all_ports=False, links=None, privileged=False)
+    
+    #parts = json.dumps(test)    
+    #stuff = {'parts': parts}    
+    
+    return render(request, 'data.html')
+ 
 
 def test_containers(name):
     c = url_c()
@@ -62,6 +80,7 @@ def build_new_containers(new_containers):
             arg.append(eval(test))
     return arg
 
+# Pack up the container with the name data from user
 def pack_to_ship(request):
     json_data=open('./harbor_master.json')
     data = json.load(json_data)
@@ -83,6 +102,7 @@ def pack_to_ship(request):
 
     return render(request, 'pack.html', returned_data)
 
-
+#def pack_to_ship(request):
+#    return render(request, 'pack.html')
 
 
