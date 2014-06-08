@@ -1,11 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div id="jumbo-container">
+  <div class="jumbotron">
+<h1>Welcome to HarborMaster.</h1>  
+  </div>
     <div class="row">
-        <div class="col-sm-12">
-            <h1>Welcome to The Harbor. Please see the HarborMaster</h1>
+        <div class="col-sm-4">
+            <div class="center-align"><i class="ss-cloud"></i></div>
+            <h2>Pack</h2>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="center-align"><i class="ss-globe"></i></div>
+            <h2>Ship</h2>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="center-align"><i class="ss-connection"></i></div>
+            <h2>Track</h2>
         </div>
     </div>
+
 </div>
 {% endblock %}

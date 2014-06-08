@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Ship off from Port</h2>
+    <form action="" method="get">
+        <label for="name">What would you like to do with your instance</label>
+        <input type="text" name="instance_name"> 
+        <input type="submit" value="Submit">
+    </form>
+    {% for each in parts %}
+        {{ each.Name  }}
+    {% endfor %}
+{% endblock %}
